@@ -1,0 +1,13 @@
+{
+    "/dist/admin/app.js": "/dist/admin/app.js",
+    "/dist/h5/index.js": "/dist/h5/index.js",
+    "/dist/admin/index.css": "/dist/admin/index.css",
+    "/dist/h5/index.css": "/dist/h5/index.css",
+    "/dist/errors/index.css": "/dist/errors/index.css",
+    "/dist/auth/index.css": "/dist/auth/index.css",
+    "/dist/post/index.css": "/dist/post/index.css",
+    "/dist/shop/index.css": "/dist/shop/index.css",
+    "/dist/live/index.css": "/dist/live/index.css",
+    "/dist/video/index.css": "/dist/video/index.css",
+    "/dist/user/index.css": "/dist/user/index.css"
+}
