@@ -1,9 +1,10 @@
 {
-  "name": "gzdsx/shop",
-  "description": "The Shop With Laravel Framework.",
+  "name": "gzdsx/laravel-chatgpt",
+  "description": "ChatGPT应用服务器端",
   "keywords": [
     "framework",
-    "laravel"
+    "laravel",
+    "ChatGPT"
   ],
   "license": "MIT",
   "type": "project",

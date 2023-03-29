@@ -1,17 +1,17 @@
-# Laravel Shop
+# Laravel-ChatGPT
 
-<p>一款基于Laravel8.5的小型电商系统，包含APP、微信小程序、PC三端应用，
-全套源码售价500元。</p>
+<p>Chat助手服务器端源码，全套源码出售，价格2000元/套，包含web后台+APP源码</p>
 
 <p>作者微信：gzdsx1985</p>
 
 ---
-Android版下载地址:[https://shop.gzdsx.cn/apk/shopapp.apk](https://shop.gzdsx.cn/apk/shopapp.apk)
+Android版下载地址:[https://apps.gzdsx.cn/apk/chatapp.apk](https://apps.gzdsx.cn/apk/chatapp.apk)
 
-IOS版请在appStore搜索“大师兄的小店”
+IOS版请在appStore搜索“Chat助手”
 
-微信小程序
-![微信小程序](https://shop.gzdsx.cn/storage/thumb/2023/02/9Ojvxl64KrkARgm58NmM3YuFJeumuCNtZbnCj80b.jpg)
+<p>或者扫码下载</p>
+
+![微信小程序](https://chatapi.songdewei.com/storage/thumb/2023/03/9qyk6cuvVtxqBwtaWzuYe27COF7taFJs4EGYQc4M.png)
 
 
 ---
