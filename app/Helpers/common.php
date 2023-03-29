@@ -245,6 +245,22 @@ function is_wechat()
 }
 
 /**
+ * @return false|int
+ */
+function is_Safari()
+{
+    return strpos($_SERVER['HTTP_USER_AGENT'], 'Safari');
+}
+
+/**
+ * @return bool
+ */
+function is_ios()
+{
+    return strpos($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strpos($_SERVER['HTTP_USER_AGENT'], 'iPad');
+}
+
+/**
  * @param $id
  * @return mixed
  * @throws \Psr\SimpleCache\InvalidArgumentException
@@ -276,12 +292,29 @@ function jsonSuccess($result = [], $description = '')
  * @param string $errMsg
  * @param null $extra
  * @return \Illuminate\Http\JsonResponse
+ * @deprecated
  */
 function jsonError(int $errCode, string $errMsg, $extra = null)
 {
     $return = [
-        'errCode' => $errCode,
         'errMsg' => $errMsg,
+        'errCode' => $errCode
+    ];
+    if ($extra) $return['extra'] = $extra;
+    return response()->json($return);
+}
+
+/**
+ * @param $errMsg
+ * @param int $errCode
+ * @param null $extra
+ * @return \Illuminate\Http\JsonResponse
+ */
+function jsonFail($errMsg, $errCode = 500, $extra = null)
+{
+    $return = [
+        'errMsg' => $errMsg,
+        'errCode' => $errCode
     ];
     if ($extra) $return['extra'] = $extra;
     return response()->json($return);

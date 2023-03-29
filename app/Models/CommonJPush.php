@@ -11,29 +11,29 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property int|null $uid
- * @property string|null $appid
- * @property string|null $ios
- * @property string|null $android
+ * @property string|null $platform
+ * @property string|null $registrationid
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User|null $user
  * @method static Builder|CommonJPush android()
  * @method static Builder|CommonJPush ios()
  * @method static Builder|CommonJPush newModelQuery()
  * @method static Builder|CommonJPush newQuery()
  * @method static Builder|CommonJPush query()
- * @method static Builder|CommonJPush whereAndroid($value)
- * @method static Builder|CommonJPush whereAppid($value)
+ * @method static Builder|CommonJPush whereCreatedAt($value)
  * @method static Builder|CommonJPush whereId($value)
- * @method static Builder|CommonJPush whereIos($value)
+ * @method static Builder|CommonJPush wherePlatform($value)
+ * @method static Builder|CommonJPush whereRegistrationid($value)
  * @method static Builder|CommonJPush whereUid($value)
+ * @method static Builder|CommonJPush whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class CommonJPush extends Model
 {
     protected $table = 'common_jpush';
     protected $primaryKey = 'id';
-    protected $fillable = ['uid', 'appid', 'platform', 'registrationid'];
-
-    public $timestamps = false;
+    protected $fillable = ['uid', 'platform', 'registrationid'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

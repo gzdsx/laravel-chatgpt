@@ -66,66 +66,27 @@ export default [
         ]
     },
     {
-        name: '电商',
-        fullName: '商品管理',
-        icon: 'icon-goodsnew',
-        path: '/product/list',
-        group: 'ecom',
+        name: 'AI',
+        fullName: 'OpenAI',
+        icon: 'icon-form',
+        path: '/openai/payment-plan',
+        group: 'openai',
         children: [
             {
-                name: '商品管理',
-                path: '/product/list',
+                name: '付费计划',
+                path: '/openai/payment-plan',
                 isLink: false
             },
             {
-                name: '商品分类',
-                path: '/product/category',
+                name: '快捷工具',
+                path: '/openai/quickly',
                 isLink: false
             },
             {
-                name: '商品型号',
-                path: '/ecom/product-model',
+                name: '快捷分类',
+                path: '/openai/quickly-category',
                 isLink: false
-            },
-            {
-                name: '门店管理',
-                path: '/shop/list',
-                isLink: false
-            },
-            {
-                name: '运费模板',
-                path: '/product/template/list',
-                isLink: false
-            },
-            {
-                name: '优惠券管理',
-                path: '/ecom/coupon',
-                isLink: false
-            },
-        ]
-    },
-    {
-        name: '交易',
-        fullName: '交易管理',
-        icon: 'icon-recharge',
-        path: '/order/list',
-        group: 'trade',
-        children: [
-            {
-                name: '订单管理',
-                path: '/order/list',
-                isLink: false
-            },
-            {
-                name: '退款管理',
-                path: '/refund/list',
-                isLink: false
-            },
-            {
-                name: '交易流水',
-                path: '/transaction/list',
-                isLink: false
-            },
+            }
         ]
     },
     {

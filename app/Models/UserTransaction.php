@@ -28,7 +28,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read mixed|null $pay_state_des
  * @property-read mixed|null $pay_type_des
  * @property-read mixed|null $type_des
- * @property-read \App\Models\Order|null $order
  * @property-read \App\Models\User|null $otherAccount
  * @property-read \App\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|UserTransaction filter(array $input = [], $filter = null)
@@ -61,6 +60,22 @@ use Illuminate\Database\Eloquent\Model;
 class UserTransaction extends Model
 {
     use Filterable, HasDates;
+
+    const TYPE_IN = 1;
+    const TYPE_OUT = 2;
+
+    const ACCOUNT_TYPE_SHOPPING = 1;//购物
+    const ACCOUNT_TYPE_RECHARGE = 2;//充值
+    const ACCOUNT_TYPE_CHARGE = 3;//缴费
+    const ACCOUNT_TYPE_OTHER = 20;//其他
+
+    const PAY_TYPE_ALIPAY = 'alipay';
+    const PAY_TYPE_WECHAT = 'wehcat';
+    const PAY_TYPE_UNIPAY = 'unipay';
+    const PAY_TYPE_BALANCE = 'balance';
+    const PAY_TYPE_APPLE = 'apple';
+    const PAY_TYPE_OTHER = 'other';
+
 
     protected $table = 'user_transaction';
     protected $primaryKey = 'id';
@@ -101,14 +116,6 @@ class UserTransaction extends Model
     public function getPayStateDesAttribute()
     {
         return !is_null($this->pay_state) ? trans('transaction.pay.states.' . $this->pay_state) : null;
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function order()
-    {
-        return $this->hasOne(Order::class, 'transaction_id', 'id');
     }
 
     /**

@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $cate_id 分类ID
  * @property string|null $cate_name 分类名称
  * @property int $sort_num 显示顺序
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Page[] $pages
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Page> $pages
  * @property-read int|null $pages_count
  * @method static Builder|PageCategory newModelQuery()
  * @method static Builder|PageCategory newQuery()

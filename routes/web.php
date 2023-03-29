@@ -30,4 +30,4 @@ Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => 'auth']
 });
 
 
-Route::get('/test', 'Test\IndexController@index');
+Route::any('/test', 'Test\IndexController@index');

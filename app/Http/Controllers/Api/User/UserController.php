@@ -38,6 +38,19 @@ class UserController extends BaseController
         ]);
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getWebSocketToken()
+    {
+        $user = Auth::user();
+        if (!$user->websocket_token) {
+            $user->refreshWebsocketToken();
+        }
+
+        return jsonSuccess(['token' => $user->websocket_token]);
+    }
+
 
     public function getList(Request $request)
     {

@@ -21,8 +21,8 @@ class SmsController extends BaseController
     {
         $code = $this->generateCode();
         $phone = $request->input('phone');
-        //$smsClient = new SmsClient();
-        //$smsClient->send($phone, ['code' => $code]);
+        $smsClient = new SmsClient();
+        //$smsClient->setPhoneNumbers($phone)->setTemplateParam(['code'=>$code])->send();
 
         try {
             $client = new QSmsClient();

@@ -14,6 +14,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'H5'], function () {
+    Route::get('app.html', 'AppController@index');
     //page
     Route::get('page/{id}.html', 'PageController@detail');
     //post

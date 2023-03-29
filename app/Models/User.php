@@ -9,6 +9,7 @@ use App\Models\Traits\UserHasPosts;
 use EloquentFilter\Filterable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 
 
@@ -24,72 +25,63 @@ use Laravel\Passport\HasApiTokens;
  * @property int $credits 积分
  * @property string|null $password 密码
  * @property string|null $remember_token
+ * @property string|null $websocket_token websocket认证token
  * @property int $freeze 冻结
  * @property float $latitude 纬度
  * @property float $longitude 经度
  * @property int $status 状态
  * @property int $email_status 邮箱验证状态
  * @property int $name_status 实名认证状态
+ * @property int $is_paid 是否付费用户
+ * @property int $payment_plan_points 付费计划剩余点数
+ * @property \Illuminate\Support\Carbon|null $payment_plan_expires_at 付费计划到期时间
+ * @property int $free_plan_amount 每日免费计划剩余
  * @property \Illuminate\Support\Carbon|null $created_at 创建时间
  * @property \Illuminate\Support\Carbon|null $updated_at 更新时间
  * @property-read \App\Models\UserAccount|null $account
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserAddress[] $addresses
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserAddress> $addresses
  * @property-read int|null $addresses_count
  * @property-read \App\Models\AdminUser|null $admin
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $boughts
- * @property-read int|null $boughts_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EcomCart[] $cartItems
- * @property-read int|null $cart_items_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EcomCart[] $cartProducts
- * @property-read int|null $cart_products_count
  * @property-read \App\Models\UserCertify|null $certify
- * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Client> $clients
  * @property-read int|null $clients_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PostItem[] $collectedPosts
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PostItem> $collectedPosts
  * @property-read int|null $collected_posts_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EcomProductItem[] $collectedProducts
- * @property-read int|null $collected_products_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserCommissionLog[] $commissionLogs
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserCommissionLog> $commissionLogs
  * @property-read int|null $commission_logs_count
  * @property-read User|null $commonlyTransferUsers
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserConnect[] $connects
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserConnect> $connects
  * @property-read int|null $connects_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserEducation[] $educations
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserEducation> $educations
  * @property-read int|null $educations_count
- * @property-read \Illuminate\Database\Eloquent\Collection|User[] $fans
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $fans
  * @property-read int|null $fans_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserField[] $fields
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserField> $fields
  * @property-read int|null $fields_count
- * @property-read \Illuminate\Database\Eloquent\Collection|User[] $follows
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $follows
  * @property-read int|null $follows_count
  * @property-read array|string|null $status_des
  * @property-read \App\Models\UserGroup|null $group
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserLog[] $logs
+ * @property-read \App\Models\UserInviteCode|null $inviteCode
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserLog> $logs
  * @property-read int|null $logs_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CommonMaterial[] $materials
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CommonMaterial> $materials
  * @property-read int|null $materials_count
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\App\Models\Notification[] $notifications
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \App\Models\Notification> $notifications
  * @property-read int|null $notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserPosition[] $positions
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserPosition> $positions
  * @property-read int|null $positions_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PostItem[] $posts
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PostItem> $posts
  * @property-read int|null $posts_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EcomProductItem[] $products
- * @property-read int|null $products_count
  * @property-read \App\Models\UserProfile|null $profile
- * @property-read \App\Models\EcomShop|null $shop
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $solds
- * @property-read int|null $solds_count
  * @property-read \App\Models\UserStats|null $stats
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EcomShop[] $subscribedShops
- * @property-read int|null $subscribed_shops_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Token> $tokens
  * @property-read int|null $tokens_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserTransaction[] $transactions
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserTransaction> $transactions
  * @property-read int|null $transactions_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserTransferCommonly[] $transferCommonly
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserTransferCommonly> $transferCommonly
  * @property-read int|null $transfer_commonly_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserWithrawalLog[] $withdrawalLogs
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWithrawalLog> $withdrawalLogs
  * @property-read int|null $withdrawal_logs_count
  * @method static \Illuminate\Database\Eloquent\Builder|User filter(array $input = [], $filter = null)
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
@@ -104,35 +96,45 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEndsWith(string $column, string $value, string $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereFreePlanAmount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereFreeze($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereGid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereIsPaid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLatitude($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLike(string $column, string $value, string $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLongitude($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereNameStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereNickname($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePaymentPlanExpiresAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePaymentPlanPoints($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereWebsocketToken($value)
  * @mixin \Eloquent
  */
 class User extends Authenticatable
 {
     use Notifiable, Filterable, HasApiTokens, HasDates;
-    use UserHasOrders, UserHasPosts, UserHasEcom;
+    use UserHasPosts;
 
     protected $table = 'user';
     protected $primaryKey = 'uid';
     protected $fillable = [
         'uid', 'gid', 'nickname', 'phone', 'email', 'password', 'remember_token',
-        'avatar', 'status', 'email_status', 'name_status', 'freeze', 'credits'
+        'avatar', 'status', 'email_status', 'name_status', 'freeze', 'credits',
+        'is_paid', 'payment_plan_points', 'payment_plan_expires_at', 'websocket_token'
     ];
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token', 'websocket_token'];
     protected $appends = [
         'status_des'
+    ];
+    protected $dates = ['payment_plan_expires_at'];
+    protected $casts = [
+        'payment_plan_expires_at' => 'datetime:Y-m-d'
     ];
 
     public static function boot()
@@ -407,5 +409,19 @@ class User extends Authenticatable
     public function positions()
     {
         return $this->hasMany(UserPosition::class, 'uid', 'uid');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|UserInviteCode
+     */
+    public function inviteCode()
+    {
+        return $this->hasOne(UserInviteCode::class, 'uid', 'uid');
+    }
+
+    public function refreshWebsocketToken()
+    {
+        $this->websocket_token = Str::random(32);
+        $this->save();
     }
 }

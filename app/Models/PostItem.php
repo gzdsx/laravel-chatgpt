@@ -43,18 +43,18 @@ use Illuminate\Support\Facades\Auth;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\PostCategory|null $category
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $collectedUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $collectedUsers
  * @property-read int|null $collected_users_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PostComment[] $comments
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PostComment> $comments
  * @property-read int|null $comments_count
  * @property-read \App\Models\PostContent|null $content
  * @property-read \Illuminate\Contracts\Routing\UrlGenerator|string $m_url
  * @property-read mixed $state_des
  * @property-read mixed $type_des
  * @property-read \Illuminate\Contracts\Routing\UrlGenerator|string $url
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PostImage[] $images
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PostImage> $images
  * @property-read int|null $images_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PostLog[] $logs
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PostLog> $logs
  * @property-read int|null $logs_count
  * @property-read \App\Models\PostMedia|null $media
  * @property-read \App\Models\User|null $user

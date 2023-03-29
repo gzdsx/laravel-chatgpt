@@ -19,15 +19,15 @@ namespace App\Models;
  * @property string|null $template_index 首页模板
  * @property string|null $template_list 列表页模板
  * @property string|null $template_detail 详细页模板
- * @property-read \Illuminate\Database\Eloquent\Collection|PostCategory[] $children
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, PostCategory> $children
  * @property-read int|null $children_count
- * @property-read \Illuminate\Database\Eloquent\Collection|PostCategory[] $childs
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, PostCategory> $childs
  * @property-read int|null $childs_count
  * @property-read \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\UrlGenerator|string $url
  * @property-read PostCategory|null $parent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PostItem[] $posts
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PostItem> $posts
  * @property-read int|null $posts_count
- * @property-read \Illuminate\Database\Eloquent\Collection|PostCategory[] $siblings
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, PostCategory> $siblings
  * @property-read int|null $siblings_count
  * @method static \Illuminate\Database\Eloquent\Builder|PostCategory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PostCategory newQuery()

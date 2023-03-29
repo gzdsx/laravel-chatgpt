@@ -14,11 +14,11 @@
 Route::group(['namespace' => 'Notify'], function () {
 
     Route::group(['namespace' => 'Wechat', 'prefix' => 'wechat'], function () {
-        Route::any('officalaccount/server','OfficialAccountController@server');
-        Route::any('miniprogram/server','MiniProgramController@server');
+        Route::any('officalaccount/server', 'OfficialAccountController@server');
+        Route::any('miniprogram/server', 'MiniProgramController@server');
         Route::any('recharge', 'RechargeController@paid');
-        Route::any('order/paid/{app}','OrderController@paid');
-        Route::any('order/refund/{app}','OrderController@refund');
+        Route::any('order/paid/{app}', 'OrderController@paid');
+        Route::any('order/refund/{app}', 'OrderController@refund');
 
         Route::any('peisong/paid', 'PeiSongController@paid');
         Route::any('dache/paid', 'DacheController@paid');
@@ -27,13 +27,17 @@ Route::group(['namespace' => 'Notify'], function () {
     });
 
 
-    Route::group(['namespace'=>'Alipay','prefix'=>'alipay'],function (){
+    Route::group(['namespace' => 'Alipay', 'prefix' => 'alipay'], function () {
         Route::any('order.paid', 'OrderController@paid');
+        Route::any('paymentplan/paid', 'PaymentPlanController@paid');
     });
 
-    Route::group(['namespace'=>'Live','prefix'=>'live'],function (){
+    Route::group(['namespace' => 'Live', 'prefix' => 'live'], function () {
         Route::any('on_publish', 'LiveController@onPublish');
         Route::any('on_publish_done', 'LiveController@onPublishDone');
         Route::any('live/paid/{appid}', 'LiveController@paid');
     });
+
+    Route::any('appstore', 'AppStoreController@prod');
+    Route::any('appstoredev', 'AppStoreController@dev');
 });

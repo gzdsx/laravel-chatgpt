@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+
+use AlibabaCloud\Client\AlibabaCloud;
+use AlipaySdk\AlipaySdk;
 use App\Services\AccountService;
 use App\Services\Contracts\AccountServiceInterface;
 use App\Services\Contracts\OrderServiceInterface;
@@ -12,6 +15,8 @@ use App\Validators\PasswordValidator;
 use App\Validators\NickNameValidator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+use OpenAi\OpenAiClient;
+use SmsSdk\SmsSdk;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +35,17 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerValidators();
+
+        //注册OPEN
+        OpenAiClient::init(env('OPENAI_KEY'), env('OPENAI_ORG_ID'));
+        AlipaySdk::register(
+            env('ALIPAY_APP_ID'),
+            env('ALIPAY_PRIVATE_KEY'),
+            env('ALIPAY_PUBLIC_KEY'),
+            env('ALIPAY_NOTIFY_URL'),
+            env('ALIPAY_RETRUN_URL')
+        );
+        SmsSdk::registerAliyun(env('ALIYUN_ACCESS_KEY_ID'), env('ALIYUN_ACCESS_SECRET'));
     }
 
     /**

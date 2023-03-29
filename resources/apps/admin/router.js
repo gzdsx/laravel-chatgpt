@@ -20,14 +20,17 @@ router.addRoutes(OtherRoutes);
 const PageRoutes = require('./page/routes');
 router.addRoutes(PageRoutes);
 
-const TradeRoutes = require('./trade/routes');
-router.addRoutes(TradeRoutes);
+// const TradeRoutes = require('./trade/routes');
+// router.addRoutes(TradeRoutes);
 
 const PostRoutes = require('./post/routes');
 router.addRoutes(PostRoutes);
 
-const EcomRoutes = require('./ecom/routes');
-router.addRoutes(EcomRoutes);
+// const EcomRoutes = require('./ecom/routes');
+// router.addRoutes(EcomRoutes);
+
+const OpenaiRoutes = require('./openai/routes');
+router.addRoutes(OpenaiRoutes);
 
 router.addRoutes([
     {

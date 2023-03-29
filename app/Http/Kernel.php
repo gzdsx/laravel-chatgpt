@@ -60,5 +60,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'wechat.oauth' => \Overtrue\LaravelWeChat\Middleware\OAuthAuthenticate::class,
         'auth.h5' => \App\Http\Middleware\H5Authenticate::class,
+        'auth.wb' => \App\Http\Middleware\AuthenticateWithoutBack::class,
     ];
 }

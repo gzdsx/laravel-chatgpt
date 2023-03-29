@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $used 是否已使用
  * @property \Illuminate\Support\Carbon|null $created_at 创建时间
  * @property \Illuminate\Support\Carbon|null $updated_at 修改时间
- * @property-read \App\Models\EcomCoupon|null $coupon
  * @property-read \App\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|UserCoupon newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserCoupon newQuery()
@@ -41,13 +40,5 @@ class UserCoupon extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'uid', 'uid');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function coupon()
-    {
-        return $this->belongsTo(EcomCoupon::class, 'coupon_id', 'id');
     }
 }
