@@ -1004,7 +1004,7 @@ namespace App\Models{
  * @property-read int|null $follows_count
  * @property-read array|string|null $status_des
  * @property-read \App\Models\UserGroup|null $group
- * @property-read \App\Models\UserInviteCode|null $inviteCode
+ * @property-read \App\Models\UserCode|null $inviteCode
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserLog> $logs
  * @property-read int|null $logs_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CommonMaterial> $materials
@@ -1338,11 +1338,11 @@ namespace App\Models{
  * @property int $uid
  * @property string|null $code
  * @property-read \App\Models\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder|UserInviteCode newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|UserInviteCode newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|UserInviteCode query()
- * @method static \Illuminate\Database\Eloquent\Builder|UserInviteCode whereCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserInviteCode whereUid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserCode newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserCode newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserCode query()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserCode whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserCode whereUid($value)
  */
 	class UserInviteCode extends \Eloquent {}
 }

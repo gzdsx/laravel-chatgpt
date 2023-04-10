@@ -3,8 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\HasDates;
-use App\Models\Traits\UserHasEcom;
-use App\Models\Traits\UserHasOrders;
+use App\Models\Traits\UserHasChildren;
 use App\Models\Traits\UserHasPosts;
 use EloquentFilter\Filterable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -33,9 +32,12 @@ use Laravel\Passport\HasApiTokens;
  * @property int $email_status 邮箱验证状态
  * @property int $name_status 实名认证状态
  * @property int $is_paid 是否付费用户
+ * @property int $is_agent 是否代理商
+ * @property int $parent_id 上级用户
  * @property int $payment_plan_points 付费计划剩余点数
  * @property \Illuminate\Support\Carbon|null $payment_plan_expires_at 付费计划到期时间
  * @property int $free_plan_amount 每日免费计划剩余
+ * @property string|null $code_image 二维码图片
  * @property \Illuminate\Support\Carbon|null $created_at 创建时间
  * @property \Illuminate\Support\Carbon|null $updated_at 更新时间
  * @property-read \App\Models\UserAccount|null $account
@@ -43,12 +45,15 @@ use Laravel\Passport\HasApiTokens;
  * @property-read int|null $addresses_count
  * @property-read \App\Models\AdminUser|null $admin
  * @property-read \App\Models\UserCertify|null $certify
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $children
+ * @property-read int|null $children_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Client> $clients
  * @property-read int|null $clients_count
+ * @property-read \App\Models\UserCode|null $code
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PostItem> $collectedPosts
  * @property-read int|null $collected_posts_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserCommissionLog> $commissionLogs
- * @property-read int|null $commission_logs_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserCommission> $commissions
+ * @property-read int|null $commissions_count
  * @property-read User|null $commonlyTransferUsers
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserConnect> $connects
  * @property-read int|null $connects_count
@@ -62,27 +67,29 @@ use Laravel\Passport\HasApiTokens;
  * @property-read int|null $follows_count
  * @property-read array|string|null $status_des
  * @property-read \App\Models\UserGroup|null $group
- * @property-read \App\Models\UserInviteCode|null $inviteCode
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserLog> $logs
  * @property-read int|null $logs_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CommonMaterial> $materials
  * @property-read int|null $materials_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \App\Models\Notification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read User|null $parent
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserPosition> $positions
  * @property-read int|null $positions_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PostItem> $posts
  * @property-read int|null $posts_count
  * @property-read \App\Models\UserProfile|null $profile
  * @property-read \App\Models\UserStats|null $stats
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subUsers
+ * @property-read int|null $sub_users_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Token> $tokens
  * @property-read int|null $tokens_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserTransaction> $transactions
  * @property-read int|null $transactions_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserTransferCommonly> $transferCommonly
  * @property-read int|null $transfer_commonly_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWithrawalLog> $withdrawalLogs
- * @property-read int|null $withdrawal_logs_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWithdrawal> $withdrawals
+ * @property-read int|null $withdrawals_count
  * @method static \Illuminate\Database\Eloquent\Builder|User filter(array $input = [], $filter = null)
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
@@ -91,6 +98,7 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User simplePaginateFilter(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereAvatar($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereBeginsWith(string $column, string $value, string $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCodeImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCredits($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
@@ -99,12 +107,14 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereFreePlanAmount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereFreeze($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereGid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereIsAgent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIsPaid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLatitude($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLike(string $column, string $value, string $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLongitude($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereNameStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereNickname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePaymentPlanExpiresAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePaymentPlanPoints($value)
@@ -119,14 +129,15 @@ use Laravel\Passport\HasApiTokens;
 class User extends Authenticatable
 {
     use Notifiable, Filterable, HasApiTokens, HasDates;
-    use UserHasPosts;
+    use UserHasPosts, UserHasChildren;
 
     protected $table = 'user';
     protected $primaryKey = 'uid';
     protected $fillable = [
         'uid', 'gid', 'nickname', 'phone', 'email', 'password', 'remember_token',
         'avatar', 'status', 'email_status', 'name_status', 'freeze', 'credits',
-        'is_paid', 'payment_plan_points', 'payment_plan_expires_at', 'websocket_token'
+        'is_paid', 'payment_plan_points', 'payment_plan_expires_at', 'websocket_token',
+        'code_image', 'is_agent', 'parent_id'
     ];
     protected $hidden = ['password', 'remember_token', 'websocket_token'];
     protected $appends = [
@@ -358,22 +369,6 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function commissionLogs()
-    {
-        return $this->hasMany(UserCommissionLog::class, 'uid', 'uid');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function withdrawalLogs()
-    {
-        return $this->hasMany(UserWithrawalLog::class, 'uid', 'uid');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function transferCommonly()
     {
         return $this->hasMany(UserTransferCommonly::class, 'uid', 'uid');
@@ -412,11 +407,27 @@ class User extends Authenticatable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne|UserInviteCode
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|UserCommission
      */
-    public function inviteCode()
+    public function commissions()
     {
-        return $this->hasOne(UserInviteCode::class, 'uid', 'uid');
+        return $this->hasMany(UserCommission::class, 'uid', 'uid');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|UserWithdrawal
+     */
+    public function withdrawals()
+    {
+        return $this->hasMany(UserWithdrawal::class, 'uid', 'uid');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|UserCode
+     */
+    public function code()
+    {
+        return $this->hasOne(UserCode::class, 'uid', 'uid');
     }
 
     public function refreshWebsocketToken()

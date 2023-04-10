@@ -45,7 +45,12 @@ class AppServiceProvider extends ServiceProvider
             env('ALIPAY_NOTIFY_URL'),
             env('ALIPAY_RETRUN_URL')
         );
-        SmsSdk::registerAliyun(env('ALIYUN_ACCESS_KEY_ID'), env('ALIYUN_ACCESS_SECRET'));
+        SmsSdk::registerAliyun(
+            env('ALIYUN_ACCESS_KEY_ID'),
+            env('ALIYUN_ACCESS_SECRET'),
+            env('ALIYUN_SIGN_NAME'),
+            env('ALIYUN_TEMPLATE_CODE')
+        );
     }
 
     /**

@@ -209,7 +209,7 @@ trait MaterialTrait
             $material->type = 'image';
         } elseif (in_array($extension, ['mp4', 'mpeg', 'mpg', 'rmvb', 'rm', 'avi', 'wmv'])) {
             $material->type = 'video';
-        } elseif (in_array($extension, ['mp3', 'midi', 'wav'])) {
+        } elseif (in_array($extension, ['mp3', 'midi', 'wav','aac'])) {
             $material->type = 'voice';
         } elseif (in_array($extension, ['doc', 'ppt', 'xls', 'docx', 'pptx', 'xlsx', 'pdf', 'txt'])) {
             $material->type = 'doc';

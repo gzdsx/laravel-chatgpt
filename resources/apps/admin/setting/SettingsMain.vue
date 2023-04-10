@@ -8,32 +8,32 @@
                 <el-tabs>
                     <el-tab-pane label="基本设置">
                         <div class="tab-content">
-                            <settings-basic :settings="settings"></settings-basic>
+                            <settings-basic :settings="settings"/>
                         </div>
                     </el-tab-pane>
                     <el-tab-pane label="注册设置">
                         <div class="tab-content">
-                            <settings-register :settings="settings"></settings-register>
+                            <settings-register :settings="settings"/>
                         </div>
                     </el-tab-pane>
                     <el-tab-pane label="附件设置">
                         <div class="tab-content">
-                            <settings-attach :settings="settings"></settings-attach>
+                            <settings-attach :settings="settings"/>
                         </div>
                     </el-tab-pane>
                     <el-tab-pane label="水印设置">
                         <div class="tab-content">
-                            <settings-water :settings="settings"></settings-water>
+                            <settings-water :settings="settings"/>
                         </div>
                     </el-tab-pane>
                     <el-tab-pane label="微信公众号">
                         <div class="tab-content">
-                            <settings-wechat :settings="settings"></settings-wechat>
+                            <settings-wechat :settings="settings"/>
                         </div>
                     </el-tab-pane>
-                    <el-tab-pane label="推广海报">
+                    <el-tab-pane label="AI设置">
                         <div class="tab-content">
-                            <settings-poster :settings="settings"></settings-poster>
+                            <settings-open-ai :settings="settings"/>
                         </div>
                     </el-tab-pane>
                 </el-tabs>
@@ -53,10 +53,12 @@
     import SettingsWater from "./SettingsWater";
     import SettingsWechat from "./SettingsWechat";
     import SettingsPoster from "./SettingsPoster";
+    import SettingsOpenAi from "./SettingsOpenAi";
 
     export default {
         name: "SettingsMain",
         components: {
+            SettingsOpenAi,
             SettingsPoster,
             SettingsWechat,
             SettingsWater,

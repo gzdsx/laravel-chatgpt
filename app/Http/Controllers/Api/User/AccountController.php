@@ -20,7 +20,7 @@ class AccountController extends BaseController
     public function getAccount()
     {
         $account = Auth::user()->account()->firstOrCreate();
-        return jsonSuccess(['account' => $account]);
+        return jsonSuccess($account);
     }
 
     /**

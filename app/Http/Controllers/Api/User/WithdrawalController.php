@@ -15,7 +15,7 @@ class WithdrawalController extends BaseController
      */
     protected function repository()
     {
-        return Auth::user()->withdrawalLogs();
+        return Auth::user()->withdrawals();
     }
 
     /**
@@ -29,20 +29,34 @@ class WithdrawalController extends BaseController
             abort(500, 'missing amount value');
         }
 
-        $account = Auth::user()->account()->firstOrCreate();
-        if ($amount > $account->balance) {
+        $account = Auth::user()->account()->firstOrNew();
+        if ($amount > $account->commission) {
             abort(500, trans('account.insufficient account balance'));
         }
 
-        $account->freeze += $amount;
-        $account->balance -= $amount;
+        $account->commission -= $amount;
         $account->save();
 
-        $log = $this->repository()->make();
-        $log->amount = $amount;
-        $log->state = 0;
-        $log->save();
+        $withdrawal = $this->repository()->make();
+        $withdrawal->amount = $amount;
+        $withdrawal->state = 0;
+        $withdrawal->save();
 
         return jsonSuccess();
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getList(Request $request)
+    {
+        $query = $this->repository();
+
+        return jsonSuccess([
+            'total' => $query->count(),
+            'items' => $query->offset($request->input('offset', 0))
+                ->take($request->input('count', 10))->orderByDesc('id')->get()
+        ]);
     }
 }
