@@ -35,22 +35,25 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerValidators();
+        try {
+            //注册OPEN
+            OpenAiClient::init(env('OPENAI_KEY'), env('OPENAI_ORG_ID'));
+            AlipaySdk::register(
+                env('ALIPAY_APP_ID'),
+                env('ALIPAY_PRIVATE_KEY'),
+                env('ALIPAY_PUBLIC_KEY'),
+                env('ALIPAY_NOTIFY_URL'),
+                env('ALIPAY_RETRUN_URL')
+            );
+            SmsSdk::registerAliyun(
+                env('ALIYUN_ACCESS_KEY_ID'),
+                env('ALIYUN_ACCESS_SECRET'),
+                env('ALIYUN_SIGN_NAME'),
+                env('ALIYUN_TEMPLATE_CODE')
+            );
+        } catch (\Exception $exception) {
 
-        //注册OPEN
-        OpenAiClient::init(env('OPENAI_KEY'), env('OPENAI_ORG_ID'));
-        AlipaySdk::register(
-            env('ALIPAY_APP_ID'),
-            env('ALIPAY_PRIVATE_KEY'),
-            env('ALIPAY_PUBLIC_KEY'),
-            env('ALIPAY_NOTIFY_URL'),
-            env('ALIPAY_RETRUN_URL')
-        );
-        SmsSdk::registerAliyun(
-            env('ALIYUN_ACCESS_KEY_ID'),
-            env('ALIYUN_ACCESS_SECRET'),
-            env('ALIYUN_SIGN_NAME'),
-            env('ALIYUN_TEMPLATE_CODE')
-        );
+        }
     }
 
     /**
