@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "BJ79TLLV4Y.cn.gzdsx.chatapp",
+        "paths": [
+          "*"
+        ]
+      }
+    ]
+  }
+}
