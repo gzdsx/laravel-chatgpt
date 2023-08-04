@@ -1,0 +1,104 @@
+.chat-app {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    color: #ffffff;
+
+    a:link {
+        color: #ffffff;
+    }
+
+    .chat {
+        &-sidebar {
+            background-color: #202123;
+            width: 225px;
+            display: inline-block;
+        }
+
+        &-main {
+            flex: 1;
+            background-color: #444654;
+
+            &-frame {
+                display: block;
+                position: relative;
+            }
+
+            .input-bar {
+                position: fixed;
+                left: 225px;
+                right: 0;
+                bottom: 0;
+                padding: 20px 0;
+                background: RGBA(32, 33, 35, 0.4);
+                text-align: center;
+
+                .input-content {
+                    display: inline-block;
+                    text-align: center;
+                }
+
+                .input-box {
+                    background-color: #40414F;
+                    border-radius: 8px;
+                    padding: 10px;
+                    display: flex;
+                    width: 580px;
+                }
+
+                .text-input {
+                    font-size: 16px;
+                    height: 20px;
+                    background-color: transparent;
+                    border: 0;
+                    color: #CCCCCC;
+                    width: 100%;
+                    box-sizing: border-box;
+
+                    &::-webkit-input-placeholder {
+                        color: #CCCCCC;
+                    }
+                }
+
+                .button-send {
+                    color: #CCCCCC;
+                    font-size: 16px;
+                    height: 20px;
+                    background-color: transparent;
+                    border: 0;
+                }
+            }
+
+            .chat-message {
+                .text-base {
+                    padding: 20px 0;
+                    display: flex;
+                    width: 800px;
+                    margin: 0 auto;
+                }
+
+                .avatar {
+                    margin-right: 20px;
+
+                    img {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 5px;
+                    }
+                }
+
+                .message-text {
+                    font-size: 18px;
+                    color: #D1D5DB;
+                }
+
+                .text-base-gray {
+                    background-color: #444654;
+                }
+            }
+        }
+    }
+}

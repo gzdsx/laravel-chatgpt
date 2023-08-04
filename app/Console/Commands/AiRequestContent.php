@@ -19,10 +19,12 @@ namespace App\Console\Commands;
  *
  * @property string $type
  * @property string $quickly_id
+ * @property string $model_id
  * @property string $prompt
  * @property string $token
  * @property string $access_token
  * @property string $device_id
+ * @property-read string $max_tokens
  */
 class AiRequestContent
 {

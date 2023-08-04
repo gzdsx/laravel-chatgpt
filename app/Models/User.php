@@ -33,11 +33,11 @@ use Laravel\Passport\HasApiTokens;
  * @property int $name_status 实名认证状态
  * @property int $is_paid 是否付费用户
  * @property int $is_agent 是否代理商
- * @property int $parent_id 上级用户
- * @property int $payment_plan_points 付费计划剩余点数
- * @property \Illuminate\Support\Carbon|null $payment_plan_expires_at 付费计划到期时间
- * @property int $free_plan_amount 每日免费计划剩余
+ * @property int $member_type 会员类别
+ * @property string|null $member_expires_at 会员到期时间
  * @property string|null $code_image 二维码图片
+ * @property int $parent_id 上级用户
+ * @property int $free_plan_times 免费计划剩余次数
  * @property \Illuminate\Support\Carbon|null $created_at 创建时间
  * @property \Illuminate\Support\Carbon|null $updated_at 更新时间
  * @property-read \App\Models\UserAccount|null $account
@@ -104,7 +104,6 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEndsWith(string $column, string $value, string $boolean = 'and')
- * @method static \Illuminate\Database\Eloquent\Builder|User whereFreePlanAmount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereFreeze($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereGid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIsAgent($value)
@@ -112,12 +111,12 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLatitude($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLike(string $column, string $value, string $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereMemberExpiresAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereMemberType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereNameStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereNickname($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePaymentPlanExpiresAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePaymentPlanPoints($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereStatus($value)
@@ -136,16 +135,16 @@ class User extends Authenticatable
     protected $fillable = [
         'uid', 'gid', 'nickname', 'phone', 'email', 'password', 'remember_token',
         'avatar', 'status', 'email_status', 'name_status', 'freeze', 'credits',
-        'is_paid', 'payment_plan_points', 'payment_plan_expires_at', 'websocket_token',
-        'code_image', 'is_agent', 'parent_id'
+        'is_paid', 'member_type', 'member_expires_at', 'websocket_token',
+        'code_image', 'is_agent', 'parent_id', 'free_plan_times'
     ];
     protected $hidden = ['password', 'remember_token', 'websocket_token'];
     protected $appends = [
         'status_des'
     ];
-    protected $dates = ['payment_plan_expires_at'];
+    protected $dates = ['member_expires_at'];
     protected $casts = [
-        'payment_plan_expires_at' => 'datetime:Y-m-d'
+        'member_expires_at' => 'datetime:Y-m-d'
     ];
 
     public static function boot()

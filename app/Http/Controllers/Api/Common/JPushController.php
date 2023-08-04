@@ -18,10 +18,14 @@ class JPushController extends BaseController
         $registrationid = $request->input('registrationid');
         $platform = $request->input('platform', 'ios');
 
-        $model = CommonJPush::whereRegistrationid($registrationid)->firstOrNew();
-        $model->platform = $platform;
-        $model->registrationid = $registrationid;
-        $model->user()->associate(Auth::id());
-        $model->save();
+        if ($registrationid){
+            $model = CommonJPush::whereRegistrationid($registrationid)->firstOrNew();
+            $model->platform = $platform;
+            $model->registrationid = $registrationid;
+            $model->user()->associate(Auth::id());
+            $model->save();
+        }
+
+        return jsonSuccess();
     }
 }

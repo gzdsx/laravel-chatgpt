@@ -7,11 +7,11 @@
 ---
 Android版下载地址:[https://apps.gzdsx.cn/apk/chatapp.apk](https://apps.gzdsx.cn/apk/chatapp.apk)
 
-IOS版请在appStore搜索“Chat助手”
+IOS版请在appStore搜索“大师兄AI”
 
 <p>或者扫码下载</p>
 
-![微信小程序](https://chatapi.songdewei.com/storage/thumb/2023/03/9qyk6cuvVtxqBwtaWzuYe27COF7taFJs4EGYQc4M.png)
+![微信小程序](https://ai.gzdsx.cn/storage/thumb/2023/03/9qyk6cuvVtxqBwtaWzuYe27COF7taFJs4EGYQc4M.png)
 
 
 ---

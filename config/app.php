@@ -225,4 +225,5 @@ return [
         'EasyWeChat' => Overtrue\LaravelWeChat\Facade::class,
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
     ],
+    'mix_url' => env('MIX_ASSET_URL', null)
 ];

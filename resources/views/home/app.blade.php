@@ -82,12 +82,12 @@
 </head>
 <body>
 <div class="icon-container">
-    <img src="{{asset('images/60.png')}}" class="icon" alt="">
+    <img src="{{asset('images/80.png')}}" class="icon" alt="">
 </div>
-<div class="version">Chat助手 v1.3.0</div>
+<div class="version">大师兄AI v1.4.0</div>
 @if (is_wechat())
     <div class="title">下载方法</div>
-    <div class="section-title">由于微信的限制，请在浏览器中打开此链接或者直接在AppStore搜索Chat助手</div>
+    <div class="section-title">由于微信的限制，请在浏览器中打开此链接或者直接在AppStore搜索大师兄AI</div>
     <div class="section"><img src="{{asset('images/app/demo1.jpg')}}" alt=""></div>
 @else
     @if(is_ios())
@@ -110,5 +110,7 @@
         window.open('itms-apps://itunes.apple.com/app/id6446398690');
     });
 </script>
+
+
 </body>
 </html>

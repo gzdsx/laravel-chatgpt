@@ -1,6 +1,5 @@
 const mix = require('laravel-mix');
 if (mix.inProduction()) {
-    mix.version();
     mix.webpackConfig({
         resolve: {
             alias: {
@@ -19,22 +18,13 @@ mix.options({
     processCssUrls: false
 });
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
-
+mix.vue();
 // mix.js('resources/js/vue.js', 'public/lib/vue/vue-chunk.js');
 // mix.js('resources/js/common.js', 'public/dist/common');
 
 //h5
 mix.js('resources/apps/h5/index.js', 'public/dist/h5');
+mix.js('resources/apps/openai/index.js', 'public/dist/openai');
 //后台
 mix.js('resources/apps/admin/app.js', 'public/dist/admin');
 //sass
@@ -50,4 +40,7 @@ mix.sass('resources/sass/shop/index.scss', 'public/dist/shop');
 mix.sass('resources/sass/live/index.scss', 'public/dist/live');
 mix.sass('resources/sass/video/index.scss', 'public/dist/video');
 mix.sass('resources/sass/user/index.scss', 'public/dist/user');
+mix.sass('resources/sass/openai/index.scss', 'public/dist/openai');
 
+mix.version();
+mix.sourceMaps();

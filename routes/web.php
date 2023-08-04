@@ -15,5 +15,5 @@ require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
 require __DIR__ . '/post.php';
 //首页
-Route::get('/', 'H5\AppController@index');
+Route::get('/', 'OpenAi\IndexController@index');
 Route::any('/test', 'Test\IndexController@index');

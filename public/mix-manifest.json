@@ -1,13 +1,15 @@
 {
-    "/dist/admin/app.js": "/dist/admin/app.js",
-    "/dist/h5/index.js": "/dist/h5/index.js",
-    "/dist/admin/index.css": "/dist/admin/index.css",
-    "/dist/h5/index.css": "/dist/h5/index.css",
-    "/dist/errors/index.css": "/dist/errors/index.css",
-    "/dist/auth/index.css": "/dist/auth/index.css",
-    "/dist/post/index.css": "/dist/post/index.css",
-    "/dist/shop/index.css": "/dist/shop/index.css",
-    "/dist/live/index.css": "/dist/live/index.css",
-    "/dist/video/index.css": "/dist/video/index.css",
-    "/dist/user/index.css": "/dist/user/index.css"
+    "/dist/h5/index.js": "/dist/h5/index.js?id=af1d864176d685c14b315605301eec28",
+    "/dist/openai/index.js": "/dist/openai/index.js?id=7df70fbd7530eadb435d81f454b7374a",
+    "/dist/admin/app.js": "/dist/admin/app.js?id=69228ea0521beca8abd4d2ad92c521c5",
+    "/dist/auth/index.css": "/dist/auth/index.css?id=42d0239461be7c11612cc5d6e068319b",
+    "/dist/errors/index.css": "/dist/errors/index.css?id=92e40ba54de96c17535ddca2d4e26cbf",
+    "/dist/h5/index.css": "/dist/h5/index.css?id=735e0bc54572b6fc2a187d7e338165a8",
+    "/dist/admin/index.css": "/dist/admin/index.css?id=53f524104ee3990efe2efd2b6e84c8a8",
+    "/dist/openai/index.css": "/dist/openai/index.css?id=cb662bac78002ab23d48776820414c80",
+    "/dist/user/index.css": "/dist/user/index.css?id=794ac74e6ec2a176581ddff79cd9aec7",
+    "/dist/video/index.css": "/dist/video/index.css?id=53c9655117835715b2310c08376bf8c2",
+    "/dist/live/index.css": "/dist/live/index.css?id=9d819e5f3f2cdc22ce8982d7f68653ef",
+    "/dist/shop/index.css": "/dist/shop/index.css?id=052af45d9aaddc44259819512a932579",
+    "/dist/post/index.css": "/dist/post/index.css?id=168b1910287364bdcc3048cff3610c31"
 }

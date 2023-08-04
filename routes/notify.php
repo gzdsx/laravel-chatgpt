@@ -30,6 +30,7 @@ Route::group(['namespace' => 'Notify'], function () {
     Route::group(['namespace' => 'Alipay', 'prefix' => 'alipay'], function () {
         Route::any('order.paid', 'OrderController@paid');
         Route::any('paymentplan/paid', 'PaymentPlanController@paid');
+        Route::any('openai/product/paid', 'OpenAiProductController@paid');
     });
 
     Route::group(['namespace' => 'Live', 'prefix' => 'live'], function () {

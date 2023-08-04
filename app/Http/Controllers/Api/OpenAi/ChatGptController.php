@@ -34,6 +34,7 @@ class ChatGptController extends BaseController
 
         $client = new OpenAiClient();
         $response = $client->completions($config);
+        dump($response->toArray());
         if ($response->success()) {
             return jsonSuccess([
                 '_id' => $response->id,

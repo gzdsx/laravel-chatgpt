@@ -69,22 +69,27 @@ export default [
         name: 'AI',
         fullName: 'OpenAI',
         icon: 'icon-form',
-        path: '/openai/payment-plan',
+        path: '/openai/product',
         group: 'openai',
         children: [
             {
                 name: '付费计划',
-                path: '/openai/payment-plan',
+                path: '/openai/product',
                 isLink: false
             },
             {
                 name: '快捷工具',
-                path: '/openai/quickly',
+                path: '/openai/prompt-model',
                 isLink: false
             },
             {
                 name: '快捷分类',
-                path: '/openai/quickly-category',
+                path: '/openai/prompt-category',
+                isLink: false
+            },
+            {
+                name: '请求记录',
+                path: '/openai/request-log',
                 isLink: false
             }
         ]

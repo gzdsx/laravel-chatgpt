@@ -16,6 +16,13 @@
             <td class="cell-tips">每台设备每日可使用的免费次数</td>
         </tr>
         <tr>
+            <td class="cell-label">欢迎提示语:</td>
+            <td class="cell-input">
+                <el-input type="textarea" rows="3" v-model="settings.ai_wellcome_msg"/>
+            </td>
+            <td class="cell-tips">AI聊天欢迎提示语</td>
+        </tr>
+        <tr>
             <td class="cell-label">计费规则说明:</td>
             <td class="cell-input">
                 <el-input type="textarea" rows="5" v-model="settings.ai_billing_rules_desc"/>

@@ -23,10 +23,7 @@ export default {
             let offset = (page - 1) * pageSize;
             let count = pageSize;
             this.$get(listApi, {...params, offset, count}).then(response => {
-                let {total, items} = response.result;
-                this.total = total;
-                this.dataList = items;
-                this.loading = false;
+                this.onLoaded(response);
                 this.onFinish(response);
             });
         },
@@ -43,6 +40,12 @@ export default {
         },
         onFinish() {
 
+        },
+        onLoaded(response) {
+            let {total, items} = response.result;
+            this.total = total;
+            this.dataList = items;
+            this.loading = false;
         }
     }
 }

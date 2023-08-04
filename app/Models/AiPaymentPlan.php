@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\AiPaymentPlan
  *
  * @property int $id
+ * @property string|null $title
  * @property int $type
  * @property int|null $value
  * @property string $price
@@ -27,6 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|AiPaymentPlan whereIapPrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AiPaymentPlan whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AiPaymentPlan wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AiPaymentPlan whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AiPaymentPlan whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AiPaymentPlan whereValue($value)
  * @mixin \Eloquent

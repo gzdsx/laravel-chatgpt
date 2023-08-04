@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Notify\Alipay;
 
 use App\Http\Controllers\Controller;
-use App\Models\AiPaymentPlan;
+use App\Models\OpenAiProduct;
 use App\Models\UserPrepay;
 use App\Models\UserTransaction;
 use Illuminate\Http\Request;
@@ -24,18 +24,36 @@ class PaymentPlanController extends Controller
         Storage::put('alipay', json_encode($request->all()));
         $out_trade_no = $request->input('out_trade_no');
         if ($prepay = UserPrepay::whereOutTradeNo($out_trade_no)->first()) {
-            $plan = AiPaymentPlan::find($prepay->payable_id);
+            $product = OpenAiProduct::find($prepay->payable_id);
             $user = $prepay->user;
             $user->is_paid = 1;
-            if ($plan->type == AiPaymentPlan::TYPE_DAYS) {
-                if ($user->payment_plan_expires_at) {
-                    $user->payment_plan_expires_at = $user->payment_plan_expires_at->addDays($plan->value);
-                } else {
-                    $user->payment_plan_expires_at = now()->addDays($plan->value);
-                }
-            } else {
-                $user->payment_plan_points += $plan->value;
+            if (!$user->member_expires_at) {
+                $user->member_expires_at = now();
             }
+            if ($product->type == OpenAiProduct::TYPE_A_DAY) {
+                $user->member_expires_at->addDays(1);
+            }
+
+            if ($product->type == OpenAiProduct::TYPE_A_WEEK) {
+                $user->member_expires_at->addDays(7);
+            }
+
+            if ($product->type == OpenAiProduct::TYPE_A_MONTH) {
+                $user->member_expires_at->addMonths(1);
+            }
+
+            if ($product->type == OpenAiProduct::TYPE_A_QUARTER) {
+                $user->member_expires_at->addMonths(3);
+            }
+
+            if ($product->type == OpenAiProduct::TYPE_A_YEAR) {
+                $user->member_expires_at->addYears(1);
+            }
+
+            if ($product->type == OpenAiProduct::TYPE_A_LIFE) {
+                $user->member_expires_at->addYears(100);
+            }
+
             $user->save();
 
             $transaction = new UserTransaction();
